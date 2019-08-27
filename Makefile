@@ -1,7 +1,7 @@
 # SHELL := /bin/bash
 
 RELEASE := nginx-ingress
-NAMESPACE := kube-system
+NAMESPACE := nginx-ingress
 
 CHART_NAME := stable/nginx-ingress
 CHART_VERSION ?= 1.15.1
