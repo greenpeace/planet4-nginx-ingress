@@ -14,48 +14,45 @@ PROD_CLUSTER ?= planet4-production
 PROD_PROJECT ?= planet4-production
 PROD_ZONE ?= us-central1-a
 
-.DEFAULT_TARGET: all
-
-all: lint connect init prod history
+.DEFAULT_TARGET: status
 
 lint:
 	@find . -type f -name '*.yml' | xargs yamllint
 	@find . -type f -name '*.yaml' | xargs yamllint
 
-dev:
-# ifndef CI
-# 	$(error Please commit and push, this is intended to be run in a CI environment)
-# endif
-	gcloud config set project $(DEV_PROJECT)
-	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
+init:
 	helm init --client-only
 	helm repo update
+
+dev: lint init
+ifndef CI
+	$(error Please commit and push, this is intended to be run in a CI environment)
+endif
+	gcloud config set project $(DEV_PROJECT)
+	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
+	-kubectl create namespace $(NAMESPACE)
 	helm upgrade --install --force --wait $(RELEASE) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		-f values.yaml \
 		-f env/dev/values.yaml \
 		$(CHART_NAME)
+	$(MAKE) history
 
-connect:
-	gcloud config set project $(PROD_PROJECT)
-	gcloud container clusters get-credentials $(PROD_CLUSTER) --zone $(PROD_ZONE) --project $(PROD_PROJECT)
-
-init:
-	helm repo update
-	helm init --client-only
-	helm repo update
-
-prod:
+prod: lint init
 ifndef CI
 	$(error Please commit and push, this is intended to be run in a CI environment)
 endif
+	gcloud config set project $(PROD_PROJECT)
+	gcloud container clusters get-credentials $(PROD_PROJECT) --zone $(PROD_ZONE) --project $(PROD_PROJECT)
+	-kubectl create namespace $(NAMESPACE)
 	helm upgrade --install --force --wait $(RELEASE) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
 		-f values.yaml \
 		-f env/prod/values.yaml \
 		$(CHART_NAME)
+	$(MAKE) history
 
 destroy:
 	helm delete --purge $(RELEASE)
