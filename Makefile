@@ -4,7 +4,7 @@ RELEASE := nginx-ingress
 NAMESPACE := nginx-ingress
 
 CHART_NAME := stable/nginx-ingress
-CHART_VERSION ?= 1.17.1
+CHART_VERSION ?= 1.36.3
 
 DEV_CLUSTER ?= p4-development
 DEV_PROJECT ?= planet-4-151612
