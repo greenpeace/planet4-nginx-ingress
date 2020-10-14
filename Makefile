@@ -3,8 +3,8 @@
 RELEASE := nginx-ingress
 NAMESPACE := nginx-ingress
 
-CHART_NAME := stable/nginx-ingress
-CHART_VERSION ?= 1.36.3
+CHART_NAME := ingress-nginx/ingress-nginx
+CHART_VERSION ?= 3.7.0
 
 DEV_CLUSTER ?= p4-development
 DEV_PROJECT ?= planet-4-151612
@@ -22,6 +22,7 @@ lint:
 
 init:
 	helm init --client-only
+	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 	helm repo update
 
 dev: lint init
