@@ -7,8 +7,7 @@ defaults: &defaults
   docker:
     - image: greenpeaceinternational/circleci-base:latest
       auth:
-        username: $DOCKERHUB_USERNAME
-        password: $DOCKERHUB_PASSWORD
+        <<: *docker_auth
 
 version: 2
 
