@@ -9,6 +9,7 @@ defaults: &defaults
       auth:
         <<: *docker_auth
 
+
 version: 2
 
 jobs:
