@@ -6,8 +6,8 @@ controller:
     maxReplicas: 6
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 95
-  replicaCount: 2
-  minAvailable: 1
+  replicaCount: 3
+  minAvailable: 2
   resources:
     requests:
       cpu: 100m
