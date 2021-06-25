@@ -3,6 +3,6 @@ controller:
   autoscaling:
     enabled: true
     minReplicas: 3
-    maxReplicas: 5
+    maxReplicas: 6
 rbac:
   create: true
