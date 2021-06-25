@@ -3,6 +3,23 @@ controller:
   autoscaling:
     enabled: true
     minReplicas: 3
-    maxReplicas: 5
+    maxReplicas: 6
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 95
+  replicaCount: 3
+  minAvailable: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+  metrics:
+    port: 10254
+    # if this port is changed, change healthz-port: in extraArgs: accordingly
+    enabled: true
+
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus-stack
 rbac:
   create: true
