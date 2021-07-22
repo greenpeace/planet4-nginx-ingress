@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -11,11 +12,8 @@ spec:
     - "*.p4.greenpeace.org"
     - "*.k8s.greenpeace.org"
     - "*.greenpeace.ch"
-  # Duation of the certificate
-  duration: 4320h  # 6 months
-  # Renew a day before the certificate expiration
-  renewBefore: 720h # 1 month
-  # Reference the Origin CA Issuer you created above, which must be in the same namespace.
+  duration: 4320h    # 6 months
+  renewBefore: 720h   # 1 month
   issuerRef:
     group: cert-manager.k8s.cloudflare.com
     kind: OriginIssuer
