@@ -38,6 +38,7 @@ endif
 	gcloud config set project $(DEV_PROJECT)
 	gcloud container clusters get-credentials $(DEV_CLUSTER) --zone $(DEV_ZONE) --project $(DEV_PROJECT)
 	-kubectl create namespace $(NAMESPACE)
+	kubectl apply -f certificate.yaml
 	helm3 upgrade --install --wait $(RELEASE) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
@@ -54,6 +55,7 @@ endif
 	gcloud config set project $(PROD_PROJECT)
 	gcloud container clusters get-credentials $(PROD_PROJECT) --zone $(PROD_ZONE) --project $(PROD_PROJECT)
 	-kubectl create namespace $(NAMESPACE)
+	kubectl apply -f certificate.yaml
 	helm3 upgrade --install --wait $(RELEASE) \
 		--namespace=$(NAMESPACE) \
 		--version $(CHART_VERSION) \
