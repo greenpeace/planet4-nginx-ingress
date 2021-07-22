@@ -12,8 +12,8 @@ spec:
     - "*.p4.greenpeace.org"
     - "*.k8s.greenpeace.org"
     - "*.greenpeace.ch"
-  duration: 4320h    # 6 months
-  renewBefore: 720h   # 1 month
+  duration: 168h
+  renewBefore: 24h
   issuerRef:
     group: cert-manager.k8s.cloudflare.com
     kind: OriginIssuer
