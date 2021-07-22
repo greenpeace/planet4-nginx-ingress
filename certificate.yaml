@@ -8,12 +8,12 @@ spec:
   # The secret name where cert-manager should store the signed certificate
   secretName: cloudflare-origin-certificate
   dnsNames:
-    - "*.greenpeace.org"
-    - "*.p4.greenpeace.org"
-    - "*.k8s.greenpeace.org"
-    - "*.greenpeace.ch"
-  duration: 168h
-  renewBefore: 24h
+    - 'greenpeace.org'
+    - '*.greenpeace.org'
+    - '*.p4.greenpeace.org'
+    - '*.k8s.greenpeace.org'
+  duration: 4320h
+  renewBefore: 720h
   issuerRef:
     group: cert-manager.k8s.cloudflare.com
     kind: OriginIssuer
