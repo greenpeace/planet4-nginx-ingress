@@ -1,0 +1,20 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cloudflare-origin-certificate
+  namespace: nginx-ingress
+spec:
+  # The secret name where cert-manager should store the signed certificate
+  secretName: cloudflare-origin-certificate
+  dnsNames:
+    - "*.greenpeace.org"
+    - "*.p4.greenpeace.org"
+    - "*.k8s.greenpeace.org"
+    - "*.greenpeace.ch"
+  duration: 4320h    # 6 months
+  renewBefore: 720h   # 1 month
+  issuerRef:
+    group: cert-manager.k8s.cloudflare.com
+    kind: OriginIssuer
+    name: cloudflare-origin-issuer-prod
