@@ -11,7 +11,7 @@ controller:
   resources:
     requests:
       cpu: 100m
-      memory: 200Mi
+      memory: 500Mi
   metrics:
     port: 10254
     # if this port is changed, change healthz-port: in extraArgs: accordingly
