@@ -11,7 +11,7 @@ spec:
     - 'greenpeace.org'
     - '*.greenpeace.org'
     - '*.p4.greenpeace.org'
-    - '*.k8s.greenpeace.org'
+    - '*.k8s.p4.greenpeace.org'
   duration: 4320h
   renewBefore: 720h
   issuerRef:
