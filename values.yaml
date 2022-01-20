@@ -24,6 +24,6 @@ controller:
   extraArgs:
     default-ssl-certificate: "nginx-ingress/cloudflare-origin-certificate"
   config:
-    proxy-body-size: 20m
+    proxy-body-size: 60m
 rbac:
   create: true
