@@ -10,7 +10,7 @@ controller:
   minAvailable: 2
   resources:
     requests:
-      cpu: 100m
+      cpu: 150m
       memory: 500Mi
   metrics:
     port: 10254
@@ -23,5 +23,7 @@ controller:
         release: prometheus-stack
   extraArgs:
     default-ssl-certificate: "nginx-ingress/cloudflare-origin-certificate"
+  config:
+    proxy-body-size: 20m
 rbac:
   create: true
