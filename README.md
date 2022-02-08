@@ -7,7 +7,7 @@ Ingress controller for Kubernetes using NGINX as a reverse proxy and load balanc
 
 <h1>Important Notes</h1>
 
->NOT currently being used, will hopefully use it to replace traefik at some stage.
+>CURRENTLY IN USE IN PROD AND DEV
 
 ***
 ### Requirements - Internal Only
