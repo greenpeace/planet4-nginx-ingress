@@ -23,6 +23,7 @@ controller:
         release: prometheus-stack
   extraArgs:
     default-ssl-certificate: "nginx-ingress/cloudflare-origin-certificate"
+    default-backend-service: "landing/p4-landing-static"
   config:
     proxy-body-size: 60m
 rbac:
