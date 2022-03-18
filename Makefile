@@ -25,8 +25,12 @@ lint-yaml:
 lint-ci:
 	@circleci config validate
 
+# Updates CF source IPs and adds them to the values.yaml file
+update_cf_sources:
+	./update_source_range.sh
+
 # Helm Initialisation
-init:
+init: update_cf_sources
 	helm3 repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 	helm3 repo update
 
