@@ -25,8 +25,14 @@ lint-yaml:
 lint-ci:
 	@circleci config validate
 
+# Updates CF source IPs and adds them to the values.yaml file. 
+# Only uses IP4 addresses because google does not support Ip6 and Ip4
+# addresses via a GKE K8S service configure ipSourceRange...
+update_cf_sources:
+	./update_source_range.sh
+
 # Helm Initialisation
-init:
+init: update_cf_sources
 	helm3 repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 	helm3 repo update
 
