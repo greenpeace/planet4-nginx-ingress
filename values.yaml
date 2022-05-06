@@ -1,4 +1,3 @@
----
 controller:
   autoscaling:
     enabled: true
@@ -14,15 +13,14 @@ controller:
       memory: 500Mi
   metrics:
     port: 10254
-    # if this port is changed, change healthz-port: in extraArgs: accordingly
     enabled: true
     serviceMonitor:
       enabled: true
       additionalLabels:
         release: prometheus-stack
   extraArgs:
-    default-ssl-certificate: "nginx-ingress/cloudflare-origin-certificate"
-    default-backend-service: "landing/p4-landing-static"
+    default-ssl-certificate: nginx-ingress/cloudflare-origin-certificate
+    default-backend-service: landing/p4-landing-static
   config:
     proxy-body-size: 60m
 rbac:
