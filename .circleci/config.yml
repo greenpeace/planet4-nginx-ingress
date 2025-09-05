@@ -18,13 +18,6 @@ jobs:
     steps:
       - checkout
       - run: make lint | tee /tmp/lint.log
-      - run:
-          name: Notify failure
-          when: on_fail
-          command: |
-            TYPE="Test" \
-            EXTRA_TEXT="\`\`\`$(cat /tmp/lint.log)\`\`\`" \
-            notify-job-failure.sh
   dev:
     <<: *defaults
     environment:
@@ -35,19 +28,6 @@ jobs:
       - deploy:
           name: Deploy to development cluster
           command: make dev | tee /tmp/deploy.log
-      - run:
-          name: Notify failure
-          when: on_fail
-          command: |
-            TYPE="Deploy" \
-            EXTRA_TEXT="\`\`\`
-            $(cat /tmp/deploy.log)
-            \`\`\`" \
-            notify-job-failure.sh
-      - run: |
-          TYPE="Deploy" \
-          EXTRA_TEXT="\`\`\`$(make history)\`\`\`" \
-          notify-job-success.sh
   prod:
     <<: *defaults
     environment:
@@ -58,17 +38,6 @@ jobs:
       - deploy:
           name: Deploy to production cluster
           command: make prod | tee /tmp/deploy.log
-      - run:
-          name: Notify failure
-          when: on_fail
-          command: |
-            TYPE="Deploy" \
-            EXTRA_TEXT="\`\`\`$(cat /tmp/deploy.log)\`\`\`" \
-            notify-job-failure.sh
-      - run: |
-          TYPE="Deploy" \
-          EXTRA_TEXT="\`\`\`$(make history)\`\`\`" \
-          notify-job-success.sh
 
 workflows:
   version: 2
